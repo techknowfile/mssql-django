@@ -95,7 +95,7 @@ def split_parameter_list_as_sql(self, compiler, connection):
     # Insert In clause parameters 1000 at a time into a temp table.
     lhs, _ = self.process_lhs(compiler, connection)
     _, rhs_params = self.batch_process_rhs(compiler, connection)
-
+    print("Techknowfile override")
     with connection.cursor() as cursor:
         cursor.execute("IF OBJECT_ID('tempdb.dbo.#Temp_params', 'U') IS NOT NULL DROP TABLE #Temp_params; ")
         cursor.execute("CREATE TABLE #Temp_params (params char(32))")
