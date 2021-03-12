@@ -101,7 +101,7 @@ def split_parameter_list_as_sql(self, compiler, connection):
         cursor.execute("CREATE TABLE #Temp_params (params char(32))")
         for offset in range(0, len(rhs_params), 1000):
             sqls_params = rhs_params[offset: offset + 1000]
-            sqls_params = ", ".join("({})".format(item) for item in sqls_params)
+            sqls_params = ", ".join("('{}')".format(item) for item in sqls_params)
             cursor.execute("INSERT INTO #Temp_params VALUES %s" % sqls_params)
 
     in_clause = lhs + ' IN ' + '(SELECT params from #Temp_params)'
