@@ -98,7 +98,7 @@ def split_parameter_list_as_sql(self, compiler, connection):
 
     with connection.cursor() as cursor:
         cursor.execute("IF OBJECT_ID('tempdb.dbo.#Temp_params', 'U') IS NOT NULL DROP TABLE #Temp_params; ")
-        cursor.execute("CREATE TABLE #Temp_params (params int)")
+        cursor.execute("CREATE TABLE #Temp_params (params char(32))")
         for offset in range(0, len(rhs_params), 1000):
             sqls_params = rhs_params[offset: offset + 1000]
             sqls_params = ", ".join("({})".format(item) for item in sqls_params)
